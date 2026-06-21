@@ -1,0 +1,26 @@
+.navbar{
+    background:#0B1F3A;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#F4B400;
+}
+
+ul{
+    display:flex;
+    list-style:none;
+}
+
+ul li{
+    margin-left:30px;
+}
+
+ul li a{
+    text-decoration:none;
+    color:white;
+    font-size:18px;
+}
