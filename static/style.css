@@ -1,26 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
 .navbar{
     background:#0B1F3A;
-    padding:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    padding:20px 50px;
 }
 
 .logo{
     color:#F4B400;
+    font-size:30px;
+    font-weight:bold;
 }
 
-ul{
+.menu{
     display:flex;
     list-style:none;
 }
 
-ul li{
+.menu li{
     margin-left:30px;
 }
 
-ul li a{
-    text-decoration:none;
+.menu li a{
     color:white;
+    text-decoration:none;
     font-size:18px;
+}
+.search-box{
+    text-align:center;
+    margin:30px;
+}
+
+.search-box input{
+    width:500px;
+    padding:12px;
+}
+
+.search-box button{
+    background:#F4B400;
+    border:none;
+    padding:12px 20px;
+    color:white;
+}
+
+.hero{
+    text-align:center;
+    padding:100px;
+    background:#f5f5f5;
+}
+
+.hero h1{
+    font-size:50px;
+    color:#0B1F3A;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:20px;
+}
+
+.hero button{
+    margin-top:20px;
+    background:#F4B400;
+    color:white;
+    border:none;
+    padding:15px 25px;
+}
+
+.category{
+    padding:50px;
+    text-align:center;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+}
+
+.card{
+    width:250px;
+    padding:40px;
+    margin:20px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px lightgray;
+}
+
+.new-arrivals{
+    padding:50px;
+    text-align:center;
+}
+
+.featured{
+    padding:50px;
+    text-align:center;
+}
+
+footer{
+    background:#08192E;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:white;
+}
+
+.navbar{
+background:#0B1F3A;
+display:flex;
+justify-content:space-between;
+padding:20px;
+}
+
+.logo{
+color:#F4B400;
+font-size:30px;
+font-weight:bold;
+}
+
+.menu{
+display:flex;
+list-style:none;
+}
+
+.menu li{
+margin-left:30px;
+}
+
+.menu li a{
+color:white;
+text-decoration:none;
+}
+
+footer{
+background:#08192E;
+color:white;
+text-align:center;
+padding:40px;
+margin-top:100px;
 }
