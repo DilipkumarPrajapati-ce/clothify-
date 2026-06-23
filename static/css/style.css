@@ -1,0 +1,308 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+.navbar{
+    background:#0B1F3A;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 50px;
+}
+
+.logo{
+    color:#F4B400;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    list-style:none;
+}
+
+.menu li{
+    margin-left:30px;
+}
+
+.menu li a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+.search-box{
+    text-align:center;
+    margin:30px;
+}
+
+.search-box input{
+    width:500px;
+    padding:12px;
+}
+
+.search-box button{
+    background:#F4B400;
+    border:none;
+    padding:12px 20px;
+    color:white;
+}
+
+.hero{
+    text-align:center;
+    padding:100px;
+    background:#f5f5f5;
+}
+
+.hero h1{
+    font-size:50px;
+    color:#0B1F3A;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:20px;
+}
+
+.hero button{
+    margin-top:20px;
+    background:#F4B400;
+    color:white;
+    border:none;
+    padding:15px 25px;
+}
+
+.category{
+    padding:50px;
+    text-align:center;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+}
+
+.card{
+    width:250px;
+    padding:40px;
+    margin:20px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px lightgray;
+}
+
+.new-arrivals{
+    padding:50px;
+    text-align:center;
+}
+
+.featured{
+    padding:50px;
+    text-align:center;
+}
+
+footer{
+    background:#08192E;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:white;
+}
+
+.navbar{
+background:#0B1F3A;
+display:flex;
+justify-content:space-between;
+padding:20px;
+}
+
+.logo{
+color:#F4B400;
+font-size:30px;
+font-weight:bold;
+}
+
+.menu{
+display:flex;
+list-style:none;
+}
+
+.menu li{
+margin-left:30px;
+}
+
+.menu li a{
+color:white;
+text-decoration:none;
+}
+
+footer{
+background:#08192E;
+color:white;
+text-align:center;
+padding:40px;
+margin-top:100px;
+}
+
+.register-box{
+width:400px;
+margin:50px auto;
+padding:30px;
+box-shadow:0 0 10px lightgray;
+}
+
+.register-box input{
+width:100%;
+padding:12px;
+margin-top:15px;
+}
+
+.register-box button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#F4B400;
+border:none;
+color:white;
+}
+
+/* Footer */
+
+.footer{
+    background:#08192E;
+    color:white;
+    margin-top:80px;
+}
+
+.footer-container{
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    padding:50px;
+}
+
+.footer-section{
+    width:250px;
+    margin:15px;
+}
+
+.footer-section h2,
+.footer-section h3{
+    color:#F4B400;
+    margin-bottom:15px;
+}
+
+.footer-section p{
+    line-height:1.8;
+}
+
+.footer-section ul{
+    list-style:none;
+}
+
+.footer-section ul li{
+    margin-bottom:10px;
+}
+
+.footer-section ul li a{
+    color:white;
+    text-decoration:none;
+}
+
+.footer-section ul li a:hover{
+    color:#F4B400;
+}
+
+.social-links{
+    text-align:center;
+    padding:20px;
+}
+
+.social-links a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+    font-size:18px;
+}
+
+.social-links a:hover{
+    color:#F4B400;
+}
+
+.copyright{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid gray;
+}
+.navbar{
+    background:#0B1F3A;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:#F4B400;
+    font-size:32px;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    list-style:none;
+}
+
+.menu li{
+    margin:0 15px;
+}
+
+.menu li a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+}
+
+.menu li a:hover{
+    color:#F4B400;
+}
+
+.search-box input{
+    padding:10px;
+    width:250px;
+    border-radius:5px;
+    border:none;
+}
+
+.nav-icons a{
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
+}
+
+.nav-icons a:hover{
+    color:#F4B400;
+}
+
+
+body{
+    background:#F8F9FA;
+}
+
+.background{
+    background:#0B1F3A;
+    background:#F4B400;
+    color:white;
+}
+
