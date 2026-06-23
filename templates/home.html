@@ -10,25 +10,18 @@
      href="{% static 'css/style.css' %}">
 </head>
 <body>
- 
-    <nav class="navbar">
-        <div class="logo">
-            <h1>Clothify</h1>
-        </div>
+      
+   
+
+<h1>Home Page</h1>
+
+
+{% include 'footer.html' %}
+   
     <div class="search-box">
     <input type="text" placeholder="Search Products">
     <button>Search</button>
     </div>
-    
-      <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
-            <li><a href="#">Kids</a></li>
-            <li><a href="#">Cart</a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
-       
 
     </nav>
      <section class="hero">
@@ -44,37 +37,35 @@
 
 
 <section class="new-arrivals">
-<h2>New Arrivals</h2>
+<h1>New Arrivals</h1>
 </section>
 
  <section class="featured">
-<h2>Featured Products</h2>
+<h1>Featured Products</h1>
 </section>
 
 <section class="men">
-<h2>Men Collection</h2>
+<h1>Men Collection</h1>
 </section>
 
 <section class="women">
-<h2>Women Collection</h2>
+<h1>Women Collection</h1>
 </section>
 
 <section class="offer">
-<h2>Special Offers</h2>
+<h1>Special Offers</h1>
 </section>
 
 <section class="reviews">
-<h2>Customer Reviews</h2>
+<h1>Customer Reviews</h1>
 </section>
 
 <section class="newsletter">
-<h2>Subscribe Newsletter</h2>
+<h1>Subscribe Newsletter</h1>
 </section>
 
-<footer>
-<h2>Clothify</h2>
-<p>© 2026 All Rights Reserved</p>
-</footer>
+{% include 'Contact.html' %}
+
 
 </body>
 </html>
