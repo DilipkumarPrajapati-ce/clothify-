@@ -14,9 +14,26 @@
 
         <li><a href="/kids/">Kids</a></li>
 
-        <li><a href="/new-arrivals/">New Arrivals</a></li>
+        <li><a href="/login/">Login</a></li>
+        
+        <li><a href="/register/">Register</a></li>
+    
 
-        <li><a href="/sale/">Sale</a></li>
+
+ {% if user.is_authenticated %}
+
+<a href="/profile/">{{ user.username }}</a>
+
+<a href="/logout/">Logout</a>
+
+{% else %}
+
+<a href="/login/">Login</a>
+
+<a href="/register/">Register</a>
+
+{% endif %}
+
 
     </ul>
 
@@ -24,16 +41,30 @@
         <input type="text" placeholder="Search Products">
     </div>
 
-    <div class="nav-icons">
+   
+        {% if user.is_authenticated %}
 
-        <a href="/wishlist/">❤️ Wishlist</a>
+<a href="/wishlist/">❤️ Wishlist</a>
 
-        <a href="/cart/">🛒 Cart</a>
+<a href="/cart/">🛒 Cart</a>
 
-        <a href="/login/">Login</a>
+<a href="#">{{ user.username }}</a>
 
-        <a href="/register/">Register</a>
+<a href="/logout/">Logout</a>
+
+{% else %}
+
+<a href="/login/">Login</a>
+
+<a href="/register/">Register</a>
+
+{% endif %}
 
     </div>
 
 </nav>
+
+
+<a href="/profile/">
+{{ user.username }}
+</a>
