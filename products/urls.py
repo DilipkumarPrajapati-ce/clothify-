@@ -15,8 +15,12 @@ urlpatterns = [
     path('facebook/', views.facebook, name='facebook'),
     path('youtube/', views.youtube, name='youtube'),
     path('whatsapp/', views.whatsapp, name='whatsapp'),
-    
-
+    path('product/<int:id>/', views.product_detail, name='product_detail'),
+    path(
+    "add-to-cart/<int:id>/",
+    views.add_to_cart,
+    name="add_to_cart"
+),
 
 
 

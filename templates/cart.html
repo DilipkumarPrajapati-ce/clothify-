@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cart</title>
 </head>
 <body>
      {% load static %}
@@ -13,8 +13,29 @@ href="{% static 'css/style.css' %}">
 
 {% include 'navbar.html' %}
 
+<h1>Shopping Cart</h1>
+
 <h1> cart </h1>
 
+class Cart(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.PositiveIntegerField(default=1)
+
+    added_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.name}"
 {% include 'footer.html' %}
 </body>
 </html>

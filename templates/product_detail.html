@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>{{ product.name }}</title>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="product-detail">
+
+    <img src="{{ product.image.url }}">
+
+    <div>
+
+        <h1>{{ product.name }}</h1>
+
+        <h2>₹{{ product.price }}</h2>
+
+        <p>{{ product.description }}</p>
+
+        <p>Category : {{ product.category }}</p>
+
+        <p>Stock : {{ product.stock }}</p>
+
+        <button>Add To Cart</button>
+
+        <button>Buy Now</button>
+
+    </div>
+
+</div>
+
+{% include 'footer.html' %}
+<a href="#"></a>
+</body>
+</html>

@@ -1,97 +1,263 @@
-
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Clothify</title>
-   {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-   
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clothify | Home</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
+
 <body>
-      
-   
 
-<h1>Home Page</h1>
+<!-- Navbar -->
+{% include 'navbar.html' %}
 
 
-{% include 'footer.html' %}
-   
-    <div class="search-box">
-    <input type="text" placeholder="Search Products">
-    <button>Search</button>
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <div class="hero-left">
+
+<img src="{% static 'images/men.png' %}" alt="Men">
+
     </div>
 
-    </nav>
-     <section class="hero">
+    <div class="hero-center">
 
-    <h1>Welcome To Clothify</h1>
+        <h1>Welcome to Clothify</h1>
 
-    <p>Discover Premium Fashion Collection</p>
-    <button>Shop Now</button>
+        <p>Discover Premium Fashion Collection</p>
 
-</section>
+        <a href="#products" class="shop-btn">
+            Shop Now
+        </a>
 
-<div class="section-container">
-
-    <div class="section-box">
-        <h2>Men Collection</h2>
     </div>
 
-    <div class="section-box">
-        <h2>Women Collection</h2>
+    <div class="hero-right">
+
+<img src="{% static 'images/woman.png' %}" alt="Women Fashion">
+
     </div>
 
-    <div class="section-box">
-        <h2>kids Collection</h2>
+</section>
+
+<!-- ================= offer-banner ================= -->
+
+<section class="offer-banner">
+
+🔥 Flat 50% OFF | Free Shipping | New Summer Collection
+
+</section>
+<!-- ================= SEARCH ================= -->
+
+<section class="search-section">
+
+    <form>
+
+        <input
+        type="text"
+        placeholder="Search for products, categories, brands...">
+
+        <button>
+            🔍 Search
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- ================= CATEGORY ================= -->
+
+<section class="category">
+
+    <h2>Shop By Category</h2>
+
+    <div class="category-box">
+
+        <div class="card">
+
+            <h3>👔 Men</h3>
+
+            <p>Explore Now →</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>👗 Women</h3>
+
+            <p>Explore Now →</p>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🧸 Kids</h3>
+
+            <p>Explore Now →</p>
+
+        </div>
+
     </div>
 
-    
-</div>
-
-
-<section class="new-arrivals">
-<h1>New Arrivals</h1>
 </section>
 
- <section class="featured">
-<h1>Featured Products</h1>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <div class="feature-box">
+
+        <h2>Featured Products</h2>
+
+        <p>Best Selling Collection</p>
+
+    </div>
+
+    <div class="feature-box">
+
+        <h2>New Arrivals</h2>
+
+        <p>Latest Fashion Trends</p>
+
+    </div>
+
+    <div class="feature-box">
+
+        <h2>Special Offers</h2>
+
+        <p>Flat 50% OFF</p>
+
+    </div>
+
+    <div class="feature-box">
+
+        <h2>Customer Reviews</h2>
+
+        <p>⭐⭐⭐⭐⭐</p>
+
+    </div>
+
 </section>
 
-<section class="men">
-<h1>Men Collection</h1>
+
+<!-- ================= PRODUCTS ================= -->
+
+<section id="products" class="products">
+
+    <h2>Featured Products</h2>
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <a href="{% url 'product_detail' product.id %}">
+
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            </a>
+
+            <h3>{{ product.name }}</h3>
+
+            <h4>₹ {{ product.price }}</h4>
+
+            <a href="{% url 'product_detail' product.id %}" class="view-btn">
+
+                View Details
+
+            </a>
+
+           <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+                   Add To Cart
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <h3>No Products Available</h3>
+
+        {% endfor %}
+
+    </div>
+
 </section>
 
-<section class="women">
-<h1>Women Collection</h1>
-</section>
 
-<section class="offer">
-<h1>Special Offers</h1>
-</section>
+<!-- ================= SERVICES ================= -->
 
-<section class="reviews">
-<h1>Customer Reviews</h1>
+<section class="services">
+
+    <div class="service-card">
+        <h3>🚚 Free Shipping</h3>
+        <p>Free Delivery Above ₹999</p>
+    </div>
+
+    <div class="service-card">
+        <h3>↩️ Easy Returns</h3>
+        <p>7 Days Easy Return</p>
+    </div>
+
+    <div class="service-card">
+        <h3>🔒 Secure Payment</h3>
+        <p>100% Safe Payment</p>
+    </div>
+
+    <div class="service-card">
+        <h3>🏆 Best Quality</h3>
+        <p>Premium Quality Products</p>
+    </div>
+
+    <div class="service-card">
+        <h3>🎧 24/7 Support</h3>
+        <p>Always Ready To Help</p>
+    </div>
+
 </section>
+<!-- ================= NEWSLETTER ================= -->
 
 <section class="newsletter">
-<h1>Subscribe Newsletter</h1>
+
+    <h2>Subscribe Newsletter</h2>
+
+    <form>
+
+        <input
+        type="email"
+        placeholder="Enter Your Email">
+
+        <button>
+
+            Subscribe
+
+        </button>
+
+    </form>
+
 </section>
+
+
+<!-- Contact -->
 
 {% include 'Contact.html' %}
 
-<div class="social-links">
 
-    <a href="https://instagram.com" class="social-btn">📷 Instagram</a>
+<!-- Footer -->
 
-    <a href="https://facebook.com" class="social-btn">📘 Facebook</a>
-
-    <a href="https://youtube.com" class="social-btn">▶️ YouTube</a>
-
-    <a href="https://web.whatsapp.com" class="social-btn">💬 WhatsApp</a>
-
-</div>
+{% include 'footer.html' %}
 
 </body>
 </html>
