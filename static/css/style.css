@@ -445,6 +445,51 @@ body{
     color:#0B1F3A;
 }
 
+.product-detail{
+    max-width:1200px;
+    margin:60px auto;
+    display:flex;
+    gap:50px;
+    align-items:center;
+}
+
+.product-image img{
+    width:500px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.product-info{
+    flex:1;
+}
+
+.product-info h1{
+    font-size:40px;
+}
+
+.product-info h2{
+    color:#f5b301;
+    margin:20px 0;
+}
+
+.cart-btn,
+.buy-btn{
+    padding:15px 35px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+.cart-btn{
+    background:#0F213D;
+    color:white;
+}
+
+.buy-btn{
+    background:#f5b301;
+}
+
 /* ================= SERVICES ================= */
 
 .services{
@@ -1022,4 +1067,12 @@ body{
 
 }
 
+}
+.nav-scroll{
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.wishlist-btn.active{
+    background:#ff4d6d;
+    color:white;
 }
