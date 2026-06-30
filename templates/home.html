@@ -164,25 +164,57 @@
 
         <div class="product-card">
 
+            <!-- Discount Badge -->
+            {% if product.discount > 0 %}
+            <span class="discount-badge">
+                -{{ product.discount }}%
+            </span>
+            {% endif %}
+
+            <!-- Product Image -->
             <a href="{% url 'product_detail' product.id %}">
-
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
-
             </a>
 
+            <!-- Product Name -->
             <h3>{{ product.name }}</h3>
 
-            <h4>₹ {{ product.price }}</h4>
+            <!-- Rating -->
+            <p class="rating">
+                ⭐ {{ product.rating }}/5
+            </p>
 
-            <a href="{% url 'product_detail' product.id %}" class="view-btn">
+            <!-- Price -->
+            <div class="price-box">
 
-                View Details
+                {% if product.original_price > product.price %}
+                <span class="old-price">
+                    ₹{{ product.original_price }}
+                </span>
+                {% endif %}
 
-            </a>
+                <span class="new-price">
+                    ₹{{ product.price }}
+                </span>
 
-           <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
-                   Add To Cart
-            </a>
+            </div>
+
+            <!-- Buttons -->
+            <div class="product-buttons">
+
+                <a href="{% url 'wishlist' %}" class="wishlist-btn">
+                    ❤️
+                </a>
+
+                <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+                    🛒 Add To Cart
+                </a>
+
+                <a href="{% url 'product_detail' product.id %}" class="buy-btn">
+                    Buy Now
+                </a>
+
+            </div>
 
         </div>
 

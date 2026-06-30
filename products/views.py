@@ -1,64 +1,130 @@
-from django.shortcuts import render 
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from .models import Product
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 from .models import Product, Cart
-# Create your views here.
-# Create your views here.
 
 
-from .models import Product
+# ==========================
+# Home Page
+# ==========================
 
+# Home Page
 def home(request):
-    products = Product.objects.all()
-    return render(request, "home.html", {
-        "products": products
-    })
 
+    # Search Value
+    query = request.GET.get("q")
 
+    # Check Search
+    if query:
+
+        products = Product.objects.filter(
+            name__icontains=query
+        )
+
+    else:
+
+        products = Product.objects.all()
+
+    return render(
+        request,
+        "home.html",
+        {
+            "products": products,
+            "query": query
+        }
+    )
+
+# ==========================
+# Category Pages
+# ==========================
+
+# Men's Products
 def men(request):
-    return render(request,'men.html')
 
+    products = Product.objects.filter(category__iexact="Men")
+
+    return render(
+        request,
+        "men.html",
+        {
+            "products": products
+        }
+    )
+
+
+# Women's Products
 def women(request):
-    return render(request,'women.html')
 
+    products = Product.objects.filter(category__iexact="Women")
+
+    return render(
+        request,
+        "women.html",
+        {
+            "products": products
+        }
+    )
+
+
+# Kids Products
 def kids(request):
-    return render(request,'kids.html')
 
-from django.shortcuts import render
+    products = Product.objects.filter(category__iexact="Kids")
 
-def cart(request):
-    return render(request, 'cart.html')
+    return render(
+        request,
+        "kids.html",
+        {
+            "products": products
+        }
+    )
+# ==========================
+# Static Pages
+# ==========================
 
 def wishlist(request):
-    return render(request,'wishlist.html')
+    return render(request, "wishlist.html")
+
 
 def login(request):
-    return render(request,'login.html')
+    return render(request, "login.html")
+
 
 def instagram(request):
-    return render(request,'instagram.html')
+    return render(request, "instagram.html")
+
 
 def facebook(request):
-    return render(request,'facebook.html')
+    return render(request, "facebook.html")
+
 
 def youtube(request):
-    return render(request,'youtube.html')
+    return render(request, "youtube.html")
+
 
 def whatsapp(request):
-    return render(request,'whatsapp.html')
+    return render(request, "whatsapp.html")
+
+
+# ==========================
+# Product Detail
+# ==========================
 
 def product_detail(request, id):
     product = get_object_or_404(Product, id=id)
-    return render(request, "product_detail.html", {"product": product})
+    return render(request, "product_detail.html", {
+        "product": product
+    })
 
-from django.contrib.auth.decorators import login_required
+
+# ==========================
+# Add To Cart
+# ==========================
 
 @login_required
 def add_to_cart(request, id):
 
-    product = Product.objects.get(id=id)
+    product = get_object_or_404(Product, id=id)
 
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
@@ -69,7 +135,12 @@ def add_to_cart(request, id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect("home")
+    return redirect("cart")
+
+
+# ==========================
+# Cart Page
+# ==========================
 
 @login_required
 def cart(request):
@@ -81,11 +152,7 @@ def cart(request):
     for item in cart_items:
         total += item.product.price * item.quantity
 
-    return render(
-        request,
-        "cart.html",
-        {
-            "cart_items": cart_items,
-            "total": total
-        }
-    )
+    return render(request, "cart.html", {
+        "cart_items": cart_items,
+        "total": total
+    })

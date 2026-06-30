@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Wishlist -->
+
+<section class="wishlist">
+
+    <div class="wishlist-container">
+
+        <h1>❤️ My Wishlist</h1>
+
+        <p>Your favourite products will appear here.</p>
+
+        <div class="wishlist-box">
+
+            <h2>Your Wishlist is Empty</h2>
+
+            <p>Add products to your wishlist.</p>
+
+            <a href="{% url 'home' %}" class="shop-btn">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

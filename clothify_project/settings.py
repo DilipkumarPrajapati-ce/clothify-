@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'accounts',
+   
 ]
 
 MIDDLEWARE = [
@@ -119,17 +120,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_URL = 'static/'
-
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
-# Ye line add karein taaki Django ko pata chale static files kaha hain
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

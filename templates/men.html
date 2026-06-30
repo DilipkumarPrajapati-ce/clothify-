@@ -1,20 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-     {% load static %}
+{% extends 'base.html' %}
 
-<link rel="stylesheet"
-href="{% static 'css/style.css' %}">
+{% block content %}
 
-{% include 'navbar.html' %}
+<!-- Men Collection -->
 
-<h1>Men Collection</h1>
+<section class="products">
 
-{% include 'footer.html' %}
-</body>
-</html>
+    <h2>Men Collection</h2>
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <a href="{% url 'product_detail' product.id %}">
+
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+            </a>
+
+            <h3>{{ product.name }}</h3>
+
+            <h4>₹ {{ product.price }}</h4>
+
+            <a href="{% url 'product_detail' product.id %}" class="view-btn">
+
+                View Details
+
+            </a>
+
+            <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+
+                Add To Cart
+
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <h2>No Men's Products Available</h2>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

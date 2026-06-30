@@ -16,9 +16,24 @@
     </ul>
 
     <!-- Search -->
-    <div class="search-box">
-        <input type="text" placeholder="Search Products">
-    </div>
+<div class="search-box">
+
+    <form action="{% url 'home' %}" method="GET">
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Search Products..."
+            value="{{ request.GET.q }}"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</div>
 
     <!-- Right Side -->
     <div class="nav-icons">
