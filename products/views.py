@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import Product, Cart
+from .models import Product, Cart, Wishlist
 
 
 # ==========================
@@ -82,9 +82,24 @@ def kids(request):
 # Static Pages
 # ==========================
 
-def wishlist(request):
-    return render(request, "wishlist.html")
+# ==========================
+# Wishlist Page
+# ==========================
 
+@login_required
+def wishlist(request):
+
+    wishlist_items = Wishlist.objects.filter(
+        user=request.user
+    )
+
+    return render(
+        request,
+        "wishlist.html",
+        {
+            "wishlist_items": wishlist_items
+        }
+    )
 
 def login(request):
     return render(request, "login.html")
@@ -137,7 +152,24 @@ def add_to_cart(request, id):
 
     return redirect("cart")
 
+# ==========================
+# Add To Wishlist
+# ==========================
 
+@login_required
+def add_to_wishlist(request, id):
+
+    # Selected Product
+    product = get_object_or_404(Product, id=id)
+
+    # Create only if not already present
+    Wishlist.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+
+    # Go to wishlist page
+    return redirect("wishlist")
 # ==========================
 # Cart Page
 # ==========================

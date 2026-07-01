@@ -1,31 +1,69 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
 
-<!-- Wishlist -->
+    <meta charset="UTF-8">
 
-<section class="wishlist">
+    <title>Wishlist | Clothify</title>
 
-    <div class="wishlist-container">
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
 
-        <h1>❤️ My Wishlist</h1>
+</head>
 
-        <p>Your favourite products will appear here.</p>
+<body>
 
-        <div class="wishlist-box">
+{% include 'navbar.html' %}
 
-            <h2>Your Wishlist is Empty</h2>
+<section class="products">
 
-            <p>Add products to your wishlist.</p>
+    <h2>❤️ My Wishlist</h2>
 
-            <a href="{% url 'home' %}" class="shop-btn">
-                Continue Shopping
+    {% if wishlist_items %}
+
+    <div class="product-grid">
+
+        {% for item in wishlist_items %}
+
+        <div class="product-card">
+
+            <img src="{{ item.product.image.url }}"
+                 alt="{{ item.product.name }}">
+
+            <h3>{{ item.product.name }}</h3>
+
+            <h4>₹ {{ item.product.price }}</h4>
+
+            <a href="{% url 'product_detail' item.product.id %}"
+               class="view-btn">
+
+                View Details
+
             </a>
 
         </div>
 
+        {% endfor %}
+
     </div>
+
+    {% else %}
+
+    <h2>Your Wishlist is Empty ❤️</h2>
+
+    <br>
+
+    <a href="/" class="shop-btn">
+        Continue Shopping
+    </a>
+
+    {% endif %}
 
 </section>
 
-{% endblock %}
+{% include 'footer.html' %}
+
+</body>
+</html>

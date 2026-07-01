@@ -20,6 +20,12 @@ urlpatterns = [
 
     # Wishlist
     path("wishlist/", views.wishlist, name="wishlist"),
+    # Add Product To Wishlist
+path(
+    "add-to-wishlist/<int:id>/",
+    views.add_to_wishlist,
+    name="add_to_wishlist"
+),
 
     # Login
     path("login/", views.login, name="login"),
