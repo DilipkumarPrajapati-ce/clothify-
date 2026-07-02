@@ -1,12 +1,16 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-<title>{{ product.name }}</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} | Clothify</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
@@ -14,10 +18,12 @@
 
 {% include 'navbar.html' %}
 
-<div class="product-detail">
+<section class="product-detail">
 
     <div class="product-image">
+
         <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
     </div>
 
     <div class="product-info">
@@ -28,19 +34,41 @@
 
         <p>{{ product.description }}</p>
 
-        <p><b>Category:</b> {{ product.category }}</p>
+        <p><strong>Category :</strong> {{ product.category }}</p>
 
-        <p><b>Stock:</b> {{ product.stock }}</p>
+        <p><strong>Available Stock :</strong> {{ product.stock }}</p>
 
-        <button class="cart-btn">Add To Cart</button>
+        <div class="product-buttons">
 
-        <button class="buy-btn">Buy Now</button>
+            <!-- Wishlist -->
+
+            <a href="{% url 'add_to_wishlist' product.id %}"
+               class="wishlist-btn">
+                ❤️ Wishlist
+            </a>
+
+            <!-- Add To Cart -->
+
+            <a href="{% url 'add_to_cart' product.id %}"
+               class="cart-btn">
+                🛒 Add To Cart
+            </a>
+
+            <!-- Buy Now -->
+
+            <a href="{% url 'add_to_cart' product.id %}"
+               class="buy-btn">
+                ⚡ Buy Now
+            </a>
+
+        </div>
 
     </div>
 
-</div>
+</section>
 
 {% include 'footer.html' %}
-<a href="#"></a>
+
 </body>
+
 </html>

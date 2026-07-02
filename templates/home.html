@@ -202,8 +202,8 @@
             <!-- Buttons -->
             <div class="product-buttons">
 
-                <a href="{% url 'wishlist' %}" class="wishlist-btn">
-                    ❤️
+               <a href="{% url 'add_to_wishlist' product.id %}" class="wishlist-btn">
+                 ❤️ Wishlist
                 </a>
 
                 <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
