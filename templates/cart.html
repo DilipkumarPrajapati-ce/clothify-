@@ -6,79 +6,118 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Shopping Cart | Clothify</title>
 
-    <link rel="stylesheet"
-          href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    {% include 'navbar.html' %}
+{% include 'navbar.html' %}
 
-    <section class="products">
+<section class="cart-page">
 
-        <h2>🛒 Shopping Cart</h2>
+    <div class="cart-container">
+
+        <h1>🛒 Shopping Cart</h1>
 
         {% if cart_items %}
 
-        <div class="product-grid">
-
             {% for item in cart_items %}
 
-            <div class="product-card">
+            <div class="cart-card">
 
-                <img src="{{ item.product.image.url }}"
-                     alt="{{ item.product.name }}">
+                <div class="cart-image">
 
-                <h3>{{ item.product.name }}</h3>
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
 
-                <p><strong>Price :</strong> ₹ {{ item.product.price }}</p>
+                </div>
 
-                <p><strong>Quantity :</strong> {{ item.quantity }}</p>
+                <div class="cart-info">
 
-                <p>
+                    <h2>{{ item.product.name }}</h2>
 
-                    <strong>Subtotal :</strong>
+                    <p><strong>Category :</strong> {{ item.product.category }}</p>
 
-                    ₹ {{ item.product.price|floatformat:2 }}
+                    <p><strong>Price :</strong> ₹ {{ item.product.price }}</p>
 
-                </p>
+                    <p><strong>Quantity :</strong> {{ item.quantity }}</p>
+
+                   <p><strong>Subtotal :</strong>₹ {% widthratio item.product.price 1 item.quantity %}</p>
+                </div>
+
+               <div class="cart-actions">
+
+    <!-- Decrease Quantity -->
+
+    <a href="{% url 'decrease_quantity' item.id %}" class="cart-btn">
+        ➖
+    </a>
+
+    <!-- Current Quantity -->
+
+    <span class="qty">
+        {{ item.quantity }}
+    </span>
+
+    <!-- Increase Quantity -->
+
+    <a href="{% url 'increase_quantity' item.id %}" class="cart-btn">
+        ➕
+    </a>
+
+    <br><br>
+
+    <!-- Remove Product -->
+
+    <a href="{% url 'remove_from_cart' item.id %}" class="wishlist-btn">
+        🗑 Remove
+    </a>
+
+</div>
 
             </div>
 
             {% endfor %}
 
-        </div>
+            <div class="cart-summary">
 
-        <br>
+                <h2>Total : ₹ {{ total }}</h2>
 
-        <h2>Total : ₹ {{ total }}</h2>
+                <a href="#" class="buy-btn">
+                    Proceed To Checkout
+                </a>
+
+                <a href="/" class="shop-btn">
+                    Continue Shopping
+                </a>
+
+            </div>
 
         {% else %}
 
-        <h2>Your Cart is Empty 😔</h2>
+            <div class="wishlist-box">
 
-        <br>
+                <h2>Your Cart is Empty 😔</h2>
 
-        <a href="/" class="shop-btn">
+                <p>Add products to start shopping.</p>
 
-            Continue Shopping
+                <a href="/" class="shop-btn">
+                    Continue Shopping
+                </a>
 
-        </a>
+            </div>
 
         {% endif %}
 
-    </section>
+    </div>
 
-    <!-- Footer -->
-    {% include 'footer.html' %}
+</section>
+
+{% include 'footer.html' %}
 
 </body>
-
 </html>

@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Clothify</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="checkout">
+
+    <div class="checkout-container">
+
+        <div class="checkout-form">
+
+            <h2>Shipping Details</h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    name="full_name"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="mobile"
+                    placeholder="Mobile Number"
+                    required
+                >
+
+                <textarea
+                    name="address"
+                    placeholder="Full Address"
+                    required
+                ></textarea>
+
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="state"
+                    placeholder="State"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="pincode"
+                    placeholder="Pincode"
+                    required
+                >
+
+                <select name="payment_method">
+
+                    <option>
+                        Cash on Delivery
+                    </option>
+
+                    <option>
+                        Online Payment
+                    </option>
+
+                </select>
+
+                <button
+                    type="submit"
+                    class="buy-btn">
+
+                    Place Order
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
+
+            <hr>
+
+            {% for item in cart_items %}
+
+            <p>
+
+                {{ item.product.name }}
+
+                ×
+
+                {{ item.quantity }}
+
+            </p>
+
+            {% endfor %}
+
+            <hr>
+
+            <h3>
+
+                Grand Total
+
+                ₹ {{ total }}
+
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% include 'footer.html' %}
+
+</body>
+
+</html>

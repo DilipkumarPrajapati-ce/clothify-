@@ -1318,3 +1318,230 @@ body{
 .shop-btn:hover{
     background:#0F213D;
 }
+
+/* ==========================
+   CART PAGE
+========================== */
+
+.cart-page{
+    padding:80px 8%;
+    background:#f8f9fc;
+}
+
+.cart-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.cart-container h1{
+    text-align:center;
+    color:#0F213D;
+    margin-bottom:40px;
+}
+
+.cart-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    background:#fff;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.cart-image img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-info h2{
+    color:#0F213D;
+    margin-bottom:15px;
+}
+
+.cart-info p{
+    margin:10px 0;
+}
+
+.cart-actions{
+    text-align:center;
+}
+
+.qty{
+    font-size:22px;
+    font-weight:bold;
+    margin:0 10px;
+}
+
+.cart-summary{
+    margin-top:40px;
+    text-align:right;
+}
+
+.cart-summary h2{
+    margin-bottom:25px;
+}
+
+/* ==========================
+   CHECKOUT
+========================== */
+
+.checkout{
+
+    padding:80px 8%;
+    background:#f8f9fc;
+
+}
+
+.checkout-container{
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+
+}
+
+.checkout-form,
+.order-summary{
+
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.checkout-form h2,
+.order-summary h2{
+
+    margin-bottom:25px;
+    color:#0F213D;
+
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select{
+
+    width:100%;
+    padding:15px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+
+}
+
+.checkout-form textarea{
+
+    height:120px;
+    resize:none;
+
+}
+
+.order-summary p{
+
+    margin:12px 0;
+
+}
+
+.order-summary h3{
+
+    margin-top:20px;
+    color:#0F213D;
+
+}
+
+@media(max-width:900px){
+
+.checkout-container{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+/* ==========================
+   MY ORDERS
+========================== */
+
+.orders{
+
+    padding:80px 8%;
+
+    background:#f8f9fc;
+
+    min-height:80vh;
+
+}
+
+.orders-container{
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.orders h1{
+
+    margin-bottom:30px;
+
+    color:#0F213D;
+
+}
+
+.orders table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.orders th,
+.orders td{
+
+    border:1px solid #ddd;
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+.orders th{
+
+    background:#0F213D;
+
+    color:white;
+
+}
+
+.orders tr:nth-child(even){
+
+    background:#f4f4f4;
+
+}
+
+.orders h2{
+
+    text-align:center;
+
+    margin:40px 0;
+
+}

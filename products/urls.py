@@ -36,4 +36,45 @@ path(
     path("youtube/", views.youtube, name="youtube"),
     path("whatsapp/", views.whatsapp, name="whatsapp"),
 
+     # ==========================
+# Cart Management
+# ==========================
+
+path(
+    "cart/increase/<int:id>/",
+    views.increase_quantity,
+    name="increase_quantity"
+),
+
+path(
+    "cart/decrease/<int:id>/",
+    views.decrease_quantity,
+    name="decrease_quantity"
+),
+
+path(
+    "cart/remove/<int:id>/",
+    views.remove_from_cart,
+    name="remove_from_cart"
+),
+
+# ==========================
+# Checkout
+# ==========================
+
+path(
+    "checkout/",
+    views.checkout,
+    name="checkout"
+),
+# ==========================
+# My Orders
+# ==========================
+
+path(
+    "my-orders/",
+    views.my_orders,
+    name="my_orders"
+),
+
 ]
