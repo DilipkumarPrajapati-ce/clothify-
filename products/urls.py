@@ -77,4 +77,31 @@ path(
     name="my_orders"
 ),
 
+path(
+    "order/<int:id>/",
+    views.order_detail,
+    name="order_detail"
+),
+
+path(
+    "admin-dashboard/",
+    views.admin_dashboard,
+    name="admin_dashboard"
+),
+
+path(
+    "admin-products/",
+    views.admin_products,
+    name="admin_products"
+),
+
+path(
+    "profile/",
+    views.profile,
+    name="profile"
+),
+
+
+
+
 ]

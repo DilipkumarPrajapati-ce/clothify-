@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Products</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="dashboard">
+
+<h1>🛍 Product Management</h1>
+
+<br>
+
+<a href="/admin/products/product/add/" class="shop-btn">
+
+➕ Add New Product
+
+</a>
+
+<br><br>
+
+<table class="admin-table">
+
+<tr>
+
+<th>ID</th>
+
+<th>Image</th>
+
+<th>Name</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Stock</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for product in products %}
+
+<tr>
+
+<td>{{ product.id }}</td>
+
+<td>
+
+<img src="{{ product.image.url }}" width="70">
+
+</td>
+
+<td>{{ product.name }}</td>
+
+<td>{{ product.category }}</td>
+
+<td>₹ {{ product.price }}</td>
+
+<td>{{ product.stock }}</td>
+
+<td>
+
+<a href="/admin/products/product/{{ product.id }}/change/" class="cart-btn">
+
+Edit
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</section>
+
+{% include 'footer.html' %}
+
+</body>
+
+</html>

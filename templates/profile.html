@@ -1,15 +1,12 @@
-{% load static %}
-
+{{% load static %}
 <!DOCTYPE html>
-
 <html>
 
 <head>
 
-<title>Profile</title>
+<title>My Profile</title>
 
-<link rel="stylesheet"
-href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
@@ -17,9 +14,43 @@ href="{% static 'css/style.css' %}">
 
 {% include 'navbar.html' %}
 
-<h1>Welcome {{ user.username }}</h1>
+<section class="profile-page">
 
-<p>Email : {{ user.email }}</p>
+<div class="profile-card">
+
+<img src="{{ profile.profile_photo.url }}" class="profile-photo">
+
+<h2>{{ request.user.username }}</h2>
+
+<p><b>Email:</b> {{ request.user.email }}</p>
+
+<p><b>Mobile:</b> {{ profile.mobile }}</p>
+
+<p><b>Address:</b> {{ profile.address }}</p>
+
+<p><b>City:</b> {{ profile.city }}</p>
+
+<p><b>State:</b> {{ profile.state }}</p>
+
+<p><b>Pincode:</b> {{ profile.pincode }}</p>
+
+<br>
+
+<a href="{% url 'my_orders' %}" class="shop-btn">
+📦 My Orders
+</a>
+
+<a href="{% url 'wishlist' %}" class="shop-btn">
+❤️ Wishlist
+</a>
+
+<a href="{% url 'cart' %}" class="shop-btn">
+🛒 Cart
+</a>
+
+</div>
+
+</section>
 
 {% include 'footer.html' %}
 

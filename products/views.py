@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Product, Cart, Wishlist, Order
-
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
+from .models import Product, Cart, Wishlist, Order, Profile
 
 # ==========================
 # Home Page
@@ -331,5 +333,107 @@ def my_orders(request):
         "my_orders.html",
         {
             "orders": orders
+        }
+    )
+
+# ==========================
+# Order Details
+# ==========================
+
+@login_required
+def order_detail(request, id):
+
+    order = get_object_or_404(
+        Order,
+        id=id,
+        user=request.user
+    )
+
+    return render(
+        request,
+        "order_detail.html",
+        {
+            "order": order
+        }
+    )
+
+
+# ==========================
+# Admin Dashboard
+# ==========================
+
+@staff_member_required
+def admin_dashboard(request):
+
+    total_users = User.objects.count()
+
+    total_products = Product.objects.count()
+
+    total_orders = Order.objects.count()
+
+    total_cart = Cart.objects.count()
+
+    total_wishlist = Wishlist.objects.count()
+
+    revenue = 0
+
+    for order in Order.objects.all():
+
+        revenue += order.total_price
+
+    return render(
+
+        request,
+
+        "admin_dashboard.html",
+
+        {
+
+            "users": total_users,
+
+            "products": total_products,
+
+            "orders": total_orders,
+
+            "cart": total_cart,
+
+            "wishlist": total_wishlist,
+
+            "revenue": revenue
+
+        }
+
+    )
+# ==========================
+# Admin Products
+# ==========================
+
+@staff_member_required
+def admin_products(request):
+
+    products = Product.objects.all().order_by("-id")
+
+    return render(
+        request,
+        "admin_products.html",
+        {
+            "products": products
+        }
+    )
+
+# ==========================
+# Profile Page
+# ==========================
+
+@login_required
+def profile(request):
+
+    profile = Profile.objects.get(user=request.user)
+
+    return render(
+        request,
+        "profile.html",
+        {
+            "profile": profile
         }
     )

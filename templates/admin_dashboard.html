@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="dashboard">
+
+<h1>📊 Admin Dashboard</h1>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+<h2>Total Users</h2>
+<h1>{{ users }}</h1>
+</div>
+
+<div class="dashboard-card">
+<h2>Total Products</h2>
+<h1>{{ products }}</h1>
+</div>
+
+<div class="dashboard-card">
+<h2>Total Orders</h2>
+<h1>{{ orders }}</h1>
+</div>
+
+<div class="dashboard-card">
+<h2>Total Revenue</h2>
+<h1>₹ {{ revenue }}</h1>
+</div>
+
+<div class="dashboard-card">
+<h2>Wishlist Items</h2>
+<h1>{{ wishlist }}</h1>
+</div>
+
+<div class="dashboard-card">
+<h2>Cart Items</h2>
+<h1>{{ cart }}</h1>
+</div>
+
+</div>
+
+</section>
+
+<a href="{% url 'admin_products' %}" class="shop-btn">
+
+Manage Products
+
+</a>
+{% include 'footer.html' %}
+
+</body>
+
+</html>

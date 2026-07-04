@@ -48,7 +48,11 @@
 
 <tr>
 
-<td>#{{ order.id }}</td>
+<td>
+    <a href="{% url 'order_detail' order.id %}">
+        #{{ order.id }}
+    </a>
+</td>
 
 <td>{{ order.full_name }}</td>
 
