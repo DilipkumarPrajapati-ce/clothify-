@@ -5,7 +5,7 @@ from .models import Product, Cart, Wishlist, Order
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from .models import Product, Cart, Wishlist, Order, Profile
-
+from .forms import ProfileForm
 # ==========================
 # Home Page
 # ==========================
@@ -435,5 +435,42 @@ def profile(request):
         "profile.html",
         {
             "profile": profile
+        }
+    )
+
+
+@login_required
+def edit_profile(request):
+
+    profile = Profile.objects.get(user=request.user)
+
+    if request.method == "POST":
+
+        form = ProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+                request,
+                "Profile Updated Successfully."
+            )
+
+            return redirect("profile")
+
+    else:
+
+        form = ProfileForm(instance=profile)
+
+    return render(
+        request,
+        "edit_profile.html",
+        {
+            "form": form
         }
     )

@@ -34,22 +34,29 @@
 
 <p><b>Pincode:</b> {{ profile.pincode }}</p>
 
-<br>
+<div class="dashboard-menu">
 
-<a href="{% url 'my_orders' %}" class="shop-btn">
-📦 My Orders
-</a>
+    <a href="{% url 'my_orders' %}">
+        📦 My Orders
+    </a>
 
-<a href="{% url 'wishlist' %}" class="shop-btn">
-❤️ Wishlist
-</a>
+    <a href="{% url 'wishlist' %}">
+        ❤️ Wishlist
+    </a>
 
-<a href="{% url 'cart' %}" class="shop-btn">
-🛒 Cart
-</a>
+    <a href="{% url 'cart' %}">
+        🛒 My Cart
+    </a>
+
+    <a href="{% url 'edit_profile' %}">
+        ✏ Edit Profile
+    </a>
+
+    <a href="{% url 'logout' %}">
+        🚪 Logout
+    </a>
 
 </div>
-
 </section>
 
 {% include 'footer.html' %}
