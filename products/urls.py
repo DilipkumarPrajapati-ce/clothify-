@@ -107,5 +107,22 @@ path(
     name="edit_profile"
 ),
 
+path(
+    "admin-orders/",
+    views.admin_orders,
+    name="admin_orders"
+),
+
+path(
+    "update-order/<int:id>/",
+    views.update_order,
+    name="update_order"
+),
+
+path(
+    "add-review/<int:id>/",
+    views.add_review,
+    name="add_review"
+),
 
 ]

@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Update Order</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="contact">
+
+<h2>Update Order Status</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Status</label>
+
+<select name="status">
+
+<option>Pending</option>
+
+<option>Processing</option>
+
+<option>Shipped</option>
+
+<option>Delivered</option>
+
+<option>Cancelled</option>
+
+</select>
+
+<br><br>
+
+<button type="submit" class="shop-btn">
+
+Update Order
+
+</button>
+
+</form>
+
+</section>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

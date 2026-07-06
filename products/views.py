@@ -5,6 +5,7 @@ from .models import Product, Cart, Wishlist, Order
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from .models import Product, Cart, Wishlist, Order, Profile
+from .models import Review 
 from .forms import ProfileForm
 # ==========================
 # Home Page
@@ -472,5 +473,146 @@ def edit_profile(request):
         "edit_profile.html",
         {
             "form": form
+        }
+    )
+
+
+from django.contrib.auth.models import User
+from .models import Product, Order
+
+@login_required
+def admin_dashboard(request):
+
+    total_users = User.objects.count()
+
+    total_products = Product.objects.count()
+
+    total_orders = Order.objects.count()
+
+    pending_orders = Order.objects.filter(
+        order_status="Pending"
+    ).count()
+
+    completed_orders = Order.objects.filter(
+        order_status="Completed"
+    ).count()
+
+    revenue = 0
+
+    for order in Order.objects.all():
+
+        revenue += order.total_price
+
+    recent_orders = Order.objects.all().order_by("-created_at")[:10]
+
+    context = {
+
+        "total_users": total_users,
+
+        "total_products": total_products,
+
+        "total_orders": total_orders,
+
+        "pending_orders": pending_orders,
+
+        "completed_orders": completed_orders,
+
+        "revenue": revenue,
+
+        "recent_orders": recent_orders,
+
+    }
+
+    return render(
+        request,
+        "admin_dashboard.html",
+        context
+    )
+
+
+@login_required
+def admin_orders(request):
+
+    orders = Order.objects.all().order_by("-created_at")
+
+    return render(
+        request,
+        "admin_orders.html",
+        {
+            "orders": orders
+        }
+    )
+
+
+@login_required
+def update_order(request, id):
+
+    order = get_object_or_404(Order, id=id)
+
+    if request.method == "POST":
+
+        order.order_status = request.POST.get("status")
+
+        order.save()
+
+        messages.success(
+            request,
+            "Order Status Updated Successfully."
+        )
+
+        return redirect("admin_orders")
+
+    return render(
+        request,
+        "update_order.html",
+        {
+            "order": order
+        }
+    )
+
+@login_required
+def add_review(request, id):
+
+    product = get_object_or_404(Product, id=id)
+
+    if request.method == "POST":
+
+        rating = request.POST.get("rating")
+
+        review = request.POST.get("review")
+
+        Review.objects.create(
+
+            user=request.user,
+
+            product=product,
+
+            rating=rating,
+
+            review=review
+
+        )
+
+        messages.success(
+            request,
+            "Review Added Successfully."
+        )
+
+        return redirect("product_detail", id=id)
+    
+def product_detail(request, id):
+
+    product = get_object_or_404(Product, id=id)
+
+    reviews = Review.objects.filter(
+        product=product
+    ).order_by("-created_at")
+
+    return render(
+        request,
+        "product_detail.html",
+        {
+            "product": product,
+            "reviews": reviews
         }
     )

@@ -4,13 +4,11 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
 
-<title>Admin Dashboard</title>
-
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
@@ -18,53 +16,105 @@
 
 {% include 'navbar.html' %}
 
-<section class="dashboard">
+<div class="recent-orders">
 
-<h1>📊 Admin Dashboard</h1>
+    <h2>Recent Orders</h2>
 
-<div class="dashboard-grid">
+    <table>
 
-<div class="dashboard-card">
-<h2>Total Users</h2>
-<h1>{{ users }}</h1>
+        <tr>
+
+            <th>ID</th>
+
+            <th>Customer</th>
+
+            <th>Total</th>
+
+            <th>Payment</th>
+
+            <th>Status</th>
+
+            <th>Date</th>
+
+        </tr>
+
+        {% for order in recent_orders %}
+
+        <tr>
+
+            <td>#{{ order.id }}</td>
+
+            <td>{{ order.full_name }}</td>
+
+            <td>₹ {{ order.total_price }}</td>
+
+            <td>{{ order.payment_method }}</td>
+
+            <td>{{ order.order_status }}</td>
+
+            <td>{{ order.created_at|date:"d M Y" }}</td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="6">
+
+                No Orders Available
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
 </div>
 
-<div class="dashboard-card">
-<h2>Total Products</h2>
-<h1>{{ products }}</h1>
-</div>
+<section class="admin-dashboard">
 
-<div class="dashboard-card">
-<h2>Total Orders</h2>
-<h1>{{ orders }}</h1>
-</div>
+    <h1>Admin Dashboard</h1>
 
-<div class="dashboard-card">
-<h2>Total Revenue</h2>
-<h1>₹ {{ revenue }}</h1>
-</div>
+    <div class="dashboard-grid">
 
-<div class="dashboard-card">
-<h2>Wishlist Items</h2>
-<h1>{{ wishlist }}</h1>
-</div>
+        <div class="admin-card">
+            <h2>{{ total_users }}</h2>
+            <p>Total Users</p>
+        </div>
 
-<div class="dashboard-card">
-<h2>Cart Items</h2>
-<h1>{{ cart }}</h1>
-</div>
+        <div class="admin-card">
+            <h2>{{ total_products }}</h2>
+            <p>Total Products</p>
+        </div>
 
-</div>
+        <div class="admin-card">
+            <h2>{{ total_orders }}</h2>
+            <p>Total Orders</p>
+        </div>
+
+        <div class="admin-card">
+            <h2>₹ {{ revenue }}</h2>
+            <p>Total Revenue</p>
+        </div>
+
+        <div class="admin-card">
+            <h2>{{ pending_orders }}</h2>
+            <p>Pending Orders</p>
+        </div>
+
+        <div class="admin-card">
+            <h2>{{ completed_orders }}</h2>
+            <p>Completed Orders</p>
+        </div>
+
+    </div>
 
 </section>
 
-<a href="{% url 'admin_products' %}" class="shop-btn">
-
-Manage Products
-
-</a>
 {% include 'footer.html' %}
 
 </body>
-
 </html>
