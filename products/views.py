@@ -244,25 +244,51 @@ def remove_from_cart(request, id):
 # Checkout Page
 # ==========================
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.conf import settings
+import razorpay
+
+from .models import Cart, Order
+
+
 @login_required
 def checkout(request):
 
     # User Cart
-
     cart_items = Cart.objects.filter(user=request.user)
 
-    # Grand Total
+    # Cart Empty Check
+    if not cart_items.exists():
 
+        messages.warning(request, "Your cart is empty.")
+
+        return redirect("cart")
+
+    # Calculate Total
     total = 0
 
     for item in cart_items:
 
         total += item.product.price * item.quantity
 
-    # ==========================
-    # Place Order
-    # ==========================
+    # Razorpay Client
+    client = razorpay.Client(
+        auth=(
+            settings.RAZORPAY_KEY_ID,
+            settings.RAZORPAY_KEY_SECRET
+        )
+    )
 
+    # Razorpay Order
+    payment = client.order.create({
+        "amount": int(total * 100),   # Amount in paisa
+        "currency": "INR",
+        "payment_capture": 1
+    })
+
+    # Place Order
     if request.method == "POST":
 
         Order.objects.create(
@@ -283,41 +309,40 @@ def checkout(request):
 
             total_price=total,
 
-            payment_method=request.POST.get("payment_method")
+            payment_method=request.POST.get("payment_method"),
+
+            order_status="Pending"
 
         )
 
-        # Empty Cart After Order
-
+        # Empty Cart
         cart_items.delete()
-
-        # Success Message
 
         messages.success(
             request,
-            "🎉 Your Order has been placed successfully."
+            "Order placed successfully."
         )
 
-        return redirect("home")
+        return redirect("my_orders")
 
     # Checkout Page
+    context = {
+
+        "cart_items": cart_items,
+
+        "total": total,
+
+        "payment": payment,
+
+        "razorpay_key": settings.RAZORPAY_KEY_ID,
+
+    }
 
     return render(
-
         request,
-
         "checkout.html",
-
-        {
-
-            "cart_items": cart_items,
-
-            "total": total
-
-        }
-
+        context
     )
-
 # ==========================
 # My Orders
 # ==========================
@@ -616,3 +641,64 @@ def product_detail(request, id):
             "reviews": reviews
         }
     )
+
+import razorpay
+from django.conf import settings
+
+@login_required
+def payment_success(request):
+
+    messages.success(
+        request,
+        "🎉 Payment Successful!"
+    )
+
+    return render(
+        request,
+        "payment_success.html"
+    )
+
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from .models import Order
+
+@login_required
+def download_invoice(request, id):
+
+    # Get Order
+    order = Order.objects.get(id=id, user=request.user)
+
+    # Create PDF Response
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="Invoice_{order.id}.pdf"'
+
+    # PDF Canvas
+    p = canvas.Canvas(response)
+
+    # Title
+    p.setFont("Helvetica-Bold", 20)
+    p.drawString(180, 800, "CLOTHIFY")
+
+    p.setFont("Helvetica", 12)
+    p.drawString(50, 760, f"Invoice No : {order.id}")
+    p.drawString(50, 740, f"Customer : {order.full_name}")
+    p.drawString(50, 720, f"Mobile : {order.mobile}")
+    p.drawString(50, 700, f"Address : {order.address}")
+    p.drawString(50, 680, f"City : {order.city}")
+    p.drawString(50, 660, f"State : {order.state}")
+    p.drawString(50, 640, f"Pincode : {order.pincode}")
+
+    p.drawString(50, 600, f"Payment : {order.payment_method}")
+    p.drawString(50, 580, f"Payment Status : {order.payment_status}")
+    p.drawString(50, 560, f"Order Status : {order.order_status}")
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(50, 510, f"Grand Total : ₹ {order.total_price}")
+
+    p.setFont("Helvetica", 11)
+    p.drawString(50, 450, "Thank you for shopping with Clothify!")
+
+    p.showPage()
+    p.save()
+
+    return response

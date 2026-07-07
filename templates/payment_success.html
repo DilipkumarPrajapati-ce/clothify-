@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Payment Success</title>
+
+<link rel="stylesheet"
+href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="success-page">
+
+    <div class="success-box">
+
+        <h1>✅ Payment Successful</h1>
+
+        <p>
+
+            Thank you for shopping with Clothify.
+
+        </p>
+
+        <a
+        href="{% url 'my_orders' %}"
+        class="shop-btn">
+
+            View My Orders
+
+        </a>
+
+    </div>
+
+</section>
+
+{% include 'footer.html' %}
+
+</body>
+
+</html>

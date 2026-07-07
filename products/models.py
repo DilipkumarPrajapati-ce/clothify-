@@ -74,13 +74,19 @@ class Cart(models.Model):
 # Order Model
 # ==========================
 
+# ==========================
+# Order Model
+# ==========================
+
 class Order(models.Model):
 
+    # User
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
     )
 
+    # Shipping Details
     full_name = models.CharField(
         max_length=200
     )
@@ -103,21 +109,43 @@ class Order(models.Model):
         max_length=10
     )
 
+    # Order Amount
     total_price = models.DecimalField(
         max_digits=10,
         decimal_places=2
     )
 
+    # Payment Method
     payment_method = models.CharField(
         max_length=50,
         default="Cash on Delivery"
     )
 
+    # Payment Details
+    payment_id = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+
+    razorpay_order_id = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+
+    payment_status = models.CharField(
+        max_length=30,
+        default="Pending"
+    )
+
+    # Order Status
     order_status = models.CharField(
         max_length=50,
         default="Pending"
     )
 
+    # Order Date
     created_at = models.DateTimeField(
         auto_now_add=True
     )

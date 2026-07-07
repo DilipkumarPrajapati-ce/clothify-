@@ -125,4 +125,29 @@ path(
     name="add_review"
 ),
 
+path(
+    "payment-success/",
+    views.payment_success,
+    name="payment_success"
+),
+
+
+path(
+    "invoice/<int:id>/",
+    views.download_invoice,
+    name="download_invoice"
+),
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]
