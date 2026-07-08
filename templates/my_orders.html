@@ -53,6 +53,9 @@
         #{{ order.id }}
     </a>
 </td>
+<a href="{% url 'download_invoice' order.id %}" class="invoice-btn">
+    Download Invoice
+</a>
 
 <td>{{ order.full_name }}</td>
 

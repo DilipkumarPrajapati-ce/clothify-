@@ -138,7 +138,11 @@ path(
     name="download_invoice"
 ),
 
-
+path(
+    "add-review/<int:id>/",
+    views.add_review,
+    name="add_review"
+),
 
 
 

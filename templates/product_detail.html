@@ -105,6 +105,52 @@
         Submit Review
 
     </button>
+   
+    <hr>
+
+<h2>Customer Reviews</h2>
+
+<h4>
+
+⭐ {{ average_rating }}/5
+
+({{ total_reviews }} Reviews)
+
+</h4>
+
+{% for review in reviews %}
+
+<div class="review-card">
+
+    <h4>{{ review.user.username }}</h4>
+
+    <p>
+
+        ⭐ {{ review.rating }}/5
+
+    </p>
+
+    <p>
+
+        {{ review.review }}
+
+    </p>
+
+    <small>
+
+        {{ review.created_at|date:"d M Y" }}
+
+    </small>
+
+</div>
+
+{% empty %}
+
+<p>No Reviews Yet.</p>
+
+{% endfor %}
+
+     
 
 </form>
 

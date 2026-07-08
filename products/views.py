@@ -4,7 +4,14 @@ from django.contrib import messages
 from .models import Product, Cart, Wishlist, Order
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
-from .models import Product, Cart, Wishlist, Order, Profile
+from .models import (
+    Product,
+    Cart,
+    Wishlist,
+    Order,
+    Profile,
+    Review
+)
 from .models import Review 
 from .forms import ProfileForm
 # ==========================
@@ -123,16 +130,6 @@ def youtube(request):
 def whatsapp(request):
     return render(request, "whatsapp.html")
 
-
-# ==========================
-# Product Detail
-# ==========================
-
-def product_detail(request, id):
-    product = get_object_or_404(Product, id=id)
-    return render(request, "product_detail.html", {
-        "product": product
-    })
 
 
 # ==========================
@@ -633,12 +630,26 @@ def product_detail(request, id):
         product=product
     ).order_by("-created_at")
 
+    average_rating = 0
+
+    if reviews.exists():
+
+        total = 0
+
+        for review in reviews:
+
+            total += review.rating
+
+        average_rating = round(total / reviews.count(), 1)
+
     return render(
         request,
         "product_detail.html",
         {
             "product": product,
-            "reviews": reviews
+            "reviews": reviews,
+            "average_rating": average_rating,
+            "total_reviews": reviews.count()
         }
     )
 
@@ -702,3 +713,30 @@ def download_invoice(request, id):
     p.save()
 
     return response
+
+
+@login_required
+def add_review(request, id):
+
+    product = get_object_or_404(Product, id=id)
+
+    if request.method == "POST":
+
+        Review.objects.create(
+
+            product=product,
+
+            user=request.user,
+
+            rating=request.POST.get("rating"),
+
+            review=request.POST.get("review")
+
+        )
+
+        messages.success(
+            request,
+            "Review Added Successfully."
+        )
+
+    return redirect("product_detail", id=id)
